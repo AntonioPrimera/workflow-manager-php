@@ -1,0 +1,39 @@
+# Agent Integration Instructions
+
+Use these instructions when developing tasks for "{{ project_name }}" on Workflow Manager ({{ base_url }}).
+
+## Environment
+
+- Base URL: `{{ base_url }}`
+- Required headers:
+  - `Authorization: Bearer $WORKFLOW_MANAGER_API_KEY`
+  - `Accept: application/json`
+  - `Content-Type: application/json`
+- Project ID: `{{ project_id }}`
+
+## API Cheatsheet
+
+- **List workflows**: `GET /api/wfm/projects/{{ project_id }}/workflows`
+- **Create workflow**: `POST /api/wfm/projects/{{ project_id }}/workflows`
+- **Create step**: `POST /api/wfm/projects/{{ project_id }}/workflows/{workflow}/steps`
+- **List step documents**: `GET /api/wfm/projects/{{ project_id }}/workflows/{workflow}/steps/{step}/documents`
+
+## CLI Helpers
+
+Wrapper scripts live in `.dev-workflow/bin`:
+
+```bash
+# List workflows
+./.dev-workflow/bin/list-workflows
+
+# Create workflow (payload via stdin or argument)
+./.dev-workflow/bin/create-workflow '{"title":"Enable payment gateway"}'
+```
+
+## Workflow Conventions
+
+- Always log progress via Workflow Manager documents (`task.md`, `log.md`, `results.md`, `hand-off.md`).
+- Honour step dependencies before marking a task `completed`.
+- Use the workflow system for planning (requirements → tests → implementation → refactor → verification).
+
+Stay within rate limits by batching requests and retrying on `429` responses with exponential backoff.

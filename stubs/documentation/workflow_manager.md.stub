@@ -1,0 +1,33 @@
+# Workflow Manager Integration Guide
+
+Welcome to Workflow Manager on {{ base_url }}. This installer connected your project "{{ project_name }}" so AI development agents can collaborate safely.
+
+## Quick Start
+
+1. Ensure your `.env` contains the values below (the installer handled this automatically). If you need to reapply them, see the snippets printed after running `php artisan workflow-manager:install`.
+   - `WORKFLOW_MANAGER_URL`
+   - `WORKFLOW_MANAGER_API_KEY`
+   - `WORKFLOW_MANAGER_PROJECT_ID`
+2. Share the generated `agents-instructions.md` with agents so they know how to interact with your project.
+3. Use the CLI wrappers under `.dev-workflow/bin` for quick API access.
+
+## Common Tasks
+
+```bash
+# List your projects
+./.dev-workflow/bin/list-projects
+
+# Create a workflow (pass JSON payload)
+./.dev-workflow/bin/create-workflow '{"title":"Build Landing Page"}'
+
+# Add a step to the active workflow
+./.dev-workflow/bin/create-step '{"title":"Design hero section"}'
+```
+
+## Resources
+
+- Full API reference: API_DOCUMENTATION.md
+- User onboarding guide: USER_GUIDE.md
+- Package repository: https://github.com/antonioprimera/workflow-manager-php
+
+Need help? Contact support@devstream.dev with your project ID `{{ project_id }}`.
